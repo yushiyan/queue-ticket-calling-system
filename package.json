@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "express": "^5.2.1",
+    "pdf-to-printer": "^5.8.0",
+    "ws": "^8.21.1"
+  },
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/system.test.js",
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "name": "queue-kiosk",
+  "version": "1.0.0",
+  "description": "Windows 局域网排队取号、窗口叫号与 XP-80C 小票打印系统",
+  "author": "ChatGPT-CodeX",
+  "license": "MIT"
+}

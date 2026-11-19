@@ -1,0 +1,13 @@
+node_modules/
+data/
+release/
+previews/
+ticket.html
+*.tmp
+*.log
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+Desktop.ini

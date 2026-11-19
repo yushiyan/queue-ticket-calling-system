@@ -1,0 +1,80 @@
+function printTicket(num, wait) {
+    const padNum = `A${String(num).padStart(3, '0')}`;
+    const timeStr = new Date().toLocaleTimeString();
+
+    // 1. 精细缩小字号与各段落间距的 HTML
+    const htmlContent = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            @page { 
+                size: 80mm auto; 
+                margin: 0; 
+            }
+            html, body { 
+                margin: 0; 
+                padding: 0; 
+                width: 74mm; 
+                background: #fff; 
+                color: #000;
+                font-family: 'Microsoft YaHei', 'SimHei', sans-serif;
+            }
+            .wrapper {
+                width: 100%;
+                padding: 8px 10px; /* 缩减上下内边距，使其更紧凑 */
+                text-align: center;
+                box-sizing: border-box;
+            }
+            /* 标题字号从 18px 降到 15px */
+            .title { font-size: 15px; font-weight: bold; margin: 2px 0; letter-spacing: 0.5px; }
+            /* 减号分割线上下间距收紧 */
+            .text-line { font-size: 12px; font-weight: bold; margin: 4px 0; color: #000; letter-spacing: -1px; }
+            /* 提示语字号降到 12px */
+            .tip { font-size: 12px; margin-bottom: 2px; color: #333; }
+            /* 号码字号从 38px 进一步回收到 28px，确保大小适中不臃肿 */
+            .number { font-size: 28px; font-weight: bold; margin: 3px 0; letter-spacing: 0.5px; }
+            /* 等待人数降到 12px */
+            .wait { font-size: 12px; font-weight: bold; margin: 2px 0; }
+            /* 页脚说明间距与字号同步微调 */
+            .footer { font-size: 11px; margin-top: 2px; line-height: 1.4; color: #222; }
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="title">业务办理中心</div>
+            <div class="title">排队凭条</div>
+            
+            <div class="text-line">--------------------------------</div>
+            
+            <div class="tip">您的排队号码是：</div>
+            <div class="number">${padNum}</div>
+            <div class="wait">前方等待人数：${wait} 人</div>
+            
+            <div class="text-line">--------------------------------</div>
+            
+            <div class="footer">打印时间：${timeStr}</div>
+            <div class="footer">请注意大厅广播，过号请重新取号</div>
+        </div>
+    </body>
+    </html>
+    `;
+
+    const htmlPath = path.join(__dirname, 'ticket.html');
+    fs.writeFileSync(htmlPath, htmlContent, 'utf8');
+
+    // 2. 稳定的后台静默打印调用
+    const sumatraPath = path.join(__dirname, 'node_modules', 'pdf-to-printer', 'dist', 'SumatraPDF-3.4.6-32.exe');
+    const printCmd = `"${sumatraPath}" -print-to-default -silent -print-settings "noscale" "${htmlPath}"`;
+    
+    exec(printCmd, (err) => {
+        if (err) {
+            console.error(`[ERROR] 打印发送失败: ${err.message}`);
+        } else {
+            console.log(`[INFO] 打印任务已发送 -> 号码: ${padNum}, 等待人数: ${wait}`);
+        }
+        setTimeout(() => { if (fs.existsSync(htmlPath)) fs.unlinkSync(htmlPath); }, 6000);
+    });
+}
+

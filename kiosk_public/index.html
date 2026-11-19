@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>自助取号</title><link rel="stylesheet" href="/assets/style.css"><script src="/assets/settings-schema.js" defer></script><script src="/assets/common.js" defer></script><script src="/assets/kiosk.js" defer></script></head>
+<body class="kiosk-body" data-page-title="自助取号" data-kiosk-theme="jade"><main class="kiosk center">
+<header class="kiosk-header"><div class="kiosk-wordmark">自助取号 <span>SELF SERVICE</span></div><div class="brand" data-slogan>欢迎光临 · 便民服务</div></header>
+<section class="kiosk-stage"><div class="kiosk-intro"><span class="kiosk-eyebrow">有序等候 · 便捷办理</span><h1 data-center>业务办理中心</h1><p class="preserve-lines" id="welcome">欢迎光临，请点击下方按钮取号<br>领取凭条后，请留意大厅语音广播</p></div>
+<section class="kiosk-cta-card"><div class="kiosk-waiting"><span class="kiosk-live-dot" aria-hidden="true"></span>当前等候 <strong id="waiting">—</strong><span>人</span></div><button class="take" id="take" disabled>正在连接服务…</button><div id="message" class="notice" role="status" aria-live="polite"></div><div class="kiosk-result-slot"><div id="ticket" class="ticket" hidden aria-live="polite"><span class="success-label">取号成功，您的号码</span><div class="number" id="number"></div><p id="ahead"></p><small id="ticket-hint">请妥善保管小票，过号请咨询工作人员</small></div><div id="idle-hint" class="kiosk-idle"><span class="kiosk-idle-line"></span><p>轻触按钮，领取您的排队号码</p><small>请取走打印凭条，并留意现场叫号</small></div></div></section>
+<div class="kiosk-steps"><div><span>01</span><strong>触摸取号</strong></div><i aria-hidden="true">→</i><div><span>02</span><strong>留意叫号</strong></div><i aria-hidden="true">→</i><div><span>03</span><strong>前往办理</strong></div></div></section>
+<footer class="kiosk-footer"><span>感谢您的耐心等候</span><span class="clock" id="clock"></span></footer>
+</main></body></html>

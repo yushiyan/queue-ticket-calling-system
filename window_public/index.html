@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>窗口操作台 · 业务办理中心</title><link rel="stylesheet" href="/assets/style.css"><script src="/assets/settings-schema.js" defer></script><script src="/assets/common.js" defer></script><script src="/assets/window.js" defer></script></head>
+<body data-page-title="窗口操作台"><main>
+<section id="login" class="card login">
+  <div class="brand" data-center>业务办理中心</div><h1>登录窗口工作台</h1><p class="muted">选择所在窗口，开始今天的服务</p>
+  <form id="login-form">
+    <label for="login-window">所在窗口</label><input id="login-window" type="number" min="1" max="99" step="1" value="1" required>
+    <label for="password">登录密码</label><input id="password" type="password" required autocomplete="current-password" placeholder="请输入密码">
+    <button type="submit" class="login-submit">进入工作台</button>
+  </form><p class="login-admin-link"><a href="/admin.html" class="link">进入管理中心 →</a></p><p id="login-error" class="notice" role="alert"></p>
+</section>
+<div id="console" hidden>
+  <header><div><div class="brand"><span data-center>业务办理中心</span> / 工作台</div><h1><span id="window-title">1 号窗口</span><span class="title-divider"> / </span>叫号工作台</h1></div><div class="toolbar"><span class="badge" id="connection">正在连接</span><a class="link" href="/display.html" target="_blank" rel="noopener">大厅展示屏 ↗</a><button class="secondary" id="settings-open">设置</button><button class="secondary" id="logout">退出登录</button></div></header>
+  <div class="stats"><div class="stat">等待人数<strong id="wait">—</strong></div><div class="stat">本轮取号<strong id="issued">—</strong></div><div class="stat">已完成<strong id="completed">—</strong></div><div class="stat">已过号<strong id="skipped">—</strong></div></div>
+  <div class="grid"><section class="card center call-card"><span class="badge" id="window-badge">1 号窗口</span><p class="muted">当前办理号码</p><div class="number" id="current">—</div><div class="call-buttons"><button data-action="NEXT">呼叫下一位</button><button class="secondary" data-action="RECALL">重新呼叫</button><button class="secondary" data-action="COMPLETE">办理完成</button><button class="danger" data-action="SKIP">标记过号</button></div><div class="specific-call" id="specific-call" hidden><label for="specific-number">指定等待号码</label><div class="actions"><select id="specific-number"></select><button id="specific-button" class="secondary">呼叫所选号码</button></div></div><p id="message" class="notice" role="status" aria-live="polite"></p></section>
+  <section class="card"><h2>等待队列</h2><div class="rows" id="queue"></div><p class="muted">按取号顺序办理，最多显示前 100 位</p><div id="operator-service" hidden><hr><h2>取号服务</h2><p id="service" class="muted"></p><button class="secondary" data-action="PAUSE" id="pause">暂停取号</button></div><hr><h2>本轮管理</h2><button class="danger" data-action="RESET" id="reset">本轮清零</button><p class="muted">全部号码处理完后可清零。名称、密码及业务规则由管理员统一设置。</p></section></div>
+  <section class="card" id="history-card"><h2>最近操作记录</h2><table><thead><tr><th>时间</th><th>窗口</th><th>号码</th><th>操作</th></tr></thead><tbody id="history"></tbody></table></section>
+</div>
+<dialog id="settings" class="settings-dialog"><form id="preferences-form"><div class="dialog-heading"><div><div class="brand">本机偏好</div><h2>窗口显示设置</h2></div><button id="settings-close" class="secondary" type="button" aria-label="关闭设置">✕</button></div><p class="muted">仅保存在当前浏览器，不影响大厅、打印或其他窗口。</p><label class="check-field"><input id="pref-large" type="checkbox">放大当前办理号码</label><label class="check-field"><input id="pref-history" type="checkbox" checked>显示最近操作记录</label><label class="check-field"><input id="pref-own-history" type="checkbox">仅显示本窗口记录</label><label class="check-field"><input id="pref-confirm-skip" type="checkbox" checked>标记过号前再次确认</label><p id="preferences-message" class="notice" role="status"></p><button type="submit" class="login-submit">保存本机偏好</button></form></dialog>
+</main></body></html>
